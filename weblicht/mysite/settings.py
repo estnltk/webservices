@@ -25,7 +25,7 @@ SECRET_KEY = '(7dr2u8usq-3%%#hl@ye893@t4s550syd77v*r^f$*t0832)sz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['estnltk-webservices.keeleressursid.ee']
 
 
 # Application definition
