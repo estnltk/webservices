@@ -22,11 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(7dr2u8usq-3%%#hl@ye893@t4s550syd77v*r^f$*t0832)sz'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['estnltk-webservices.keeleressursid.ee']
-
 
 # Application definition
 
@@ -57,6 +54,7 @@ TEMPLATES = [
         'DIRS': ['analyse/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': False, # keep it safe while running with DEBUG=True
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -118,3 +116,39 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': '/home/sass/weblicht_log/error.log',
+            'formatter': 'verbose',
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s %(levelname)-8s [%(name)s:%(lineno)s] %(message)s',
+        },
+    },
+    'loggers': {
+        'mysite': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.security': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
+}
