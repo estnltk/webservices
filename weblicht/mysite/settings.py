@@ -22,6 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(7dr2u8usq-3%%#hl@ye893@t4s550syd77v*r^f$*t0832)sz'
 
+APPEND_SLASH = False
 
 ALLOWED_HOSTS = ['estnltk-webservices.keeleressursid.ee']
 
