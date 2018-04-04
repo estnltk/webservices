@@ -15,7 +15,13 @@ Check http://localhost:8000/analyse/
 ### Run in production environment with uWsgi server
 ```
 cd webservices/weblicht
-uwsgi --ini mysite_uwsgi.ini
+uwsgi --ini mysite_uwsgi.ini --touch-reload=mysite_uwsgi.ini --pidfile=/tmp/webservices.pid
+```
+
+Stop server:
+
+```
+uwsgi --stop /tmp/finance.pid
 ```
 
 ## Reqiurements
