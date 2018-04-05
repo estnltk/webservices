@@ -17,12 +17,13 @@ ALLOWED_HOSTS = ['estnltk-webservices.keeleressursid.ee']
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '(7dr2u8usq-3%%#hl@ye893@t4s550syd77v*r^f$*t0832)sz'
+
+APPEND_SLASH = False
 
 # Application definition
 
@@ -56,7 +57,7 @@ TEMPLATES = [
         'DIRS': ['analyse/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
-            'debug': False, # keep it safe while running with DEBUG=True
+            'debug': False,  # keep it safe while running with DEBUG=True
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -69,7 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -79,7 +79,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -98,7 +97,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
