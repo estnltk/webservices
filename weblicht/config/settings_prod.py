@@ -3,7 +3,7 @@ from . settings import *
 
 DEBUG = False
 
-STATIC_URL = '/home/sass/webservices/weblicht/static/'
+STATIC_ROOT = '/home/sass/webservices/weblicht/static/'
 
 LOGGING = {
     'version': 1,

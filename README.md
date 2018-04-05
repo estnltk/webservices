@@ -19,7 +19,11 @@ Run as root user:
 ```
 cd webservices/weblicht
 python manage.py collectstatic
-uwsgi --ini mysite_uwsgi.ini --touch-reload=mysite_uwsgi.ini --pidfile=/tmp/webservices.pid
+cd config
+uwsgi --ini weblicht_uwsgi.ini \
+      --touch-reload=weblicht_uwsgi.ini \
+      --pidfile=/tmp/webservices.pid \
+      --check-static /home/sass/webservices/weblicht/
 ```
 
 Stop server:
