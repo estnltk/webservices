@@ -13,15 +13,19 @@ python manage.py runserver --settings mysite.settings_dev 0.0.0.0:8000
 Check http://localhost:8000/analyse/
 
 ### Run in production environment with uWsgi server
+
+Run as root user:
+
 ```
 cd webservices/weblicht
+python manage.py collectstatic
 uwsgi --ini mysite_uwsgi.ini --touch-reload=mysite_uwsgi.ini --pidfile=/tmp/webservices.pid
 ```
 
 Stop server:
 
 ```
-uwsgi --stop /tmp/finance.pid
+uwsgi --stop /tmp/webservices.pid
 ```
 
 ## Reqiurements

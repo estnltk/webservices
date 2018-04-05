@@ -1,0 +1,120 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Estnltk weblicht services</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Estnltk weblicht services</a>
+</nav>
+<div class="container">
+    <h1>Welcome to Estnltk weblicht services!</h1>
+
+    <p>
+    This resource offers a number of web services for Estonian NLP and is intended to be used primarily via
+    <a href="https://weblicht.sfs.uni-tuebingen.de/">weblicht</a> environment.
+    However, it is also possible to directly access these services from web as explained below.
+    The provided services include text tokenisation, sentence splitting and morphological analysis.
+
+    <h2>Direct access</h2>
+
+    <p>
+    Estnltk web services are hosted at <a href="http://estnltk-webservices.keeleressursid.ee:8000/analyse/">estnltk-webservices.keeleressursid.ee</a>
+    and provide the following endpoints:
+
+    <ul>
+        <li><code>analyse/words/</code>: word tokenisation</li>
+        <li><code>analyse/sentences/</code>: sentence tokenisation</li>
+        <li><code>analyse/morph/</code>: full morphological analysis</li>
+    </ul>
+
+    <p>
+    To access these endpoints, prepare an input file in either plain text of TCF format.
+    Here is an example of a TCF file:
+
+    <p>
+    <textarea rows="7" cols="80">
+    <D-Spin version="0.4" xmlns="http://www.dspin.de/data">
+      <MetaData xmlns="http://www.dspin.de/data/metadata"/>
+      <TextCorpus lang="et" xmlns="http://www.dspin.de/data/textcorpus">
+        <text>Tere! Mina olen Estnltk!</text>
+      </TextCorpus>
+    </D-Spin>
+    </textarea>
+
+    <p>
+    Now you can submit your TCF file input.xml using curl command:
+
+    <p>
+    <code> curl -H 'content-type: text/tcf+xml' --data-binary @input.xml -X POST http://estnltk-webservices.keeleressursid.ee:8000/analyse/words/</code>
+
+    <p>
+    or in the case of text file:
+
+    <p>
+    <code> curl -H 'content-type: text/plain' --data-binary @input.txt -X POST http://estnltk-webservices.keeleressursid.ee:8000/analyse/words/</code>
+
+
+    <h2>Weblicht</h2>
+
+    <p>To access Estnltk services via weblicht environment, follow the steps below:
+
+    <p>
+    1. Go to <a href="https://weblicht.sfs.uni-tuebingen.de/">weblicht web page</a>,
+    login and create a new processing chain by clicking "New Chain" tab:
+
+    <p>
+    <img src="{% static "/weblicht/wl-step1.png" %}"/>
+
+    <p>
+    2. Upload a file in TCF format, e.g.
+
+    <p>
+    <textarea rows="8" cols="80">
+    <?xml version="1.0" encoding="UTF-8"?>
+    <D-Spin version="0.4" xmlns="http://www.dspin.de/data">
+      <MetaData xmlns="http://www.dspin.de/data/metadata"/>
+      <TextCorpus lang="et" xmlns="http://www.dspin.de/data/textcorpus">
+        <text>Tere! Mina olen Estnltk!</text>
+      </TextCorpus>
+    </D-Spin>
+    </textarea>
+
+    <p>
+    3. In a section "Show tools with status" select a checkbox "development".
+    Estnltk tools should now be accessible in the top area.
+    To run word tokenisation, drag "ESTNLTK tokeniser" box to the area below and click "Run tools".
+
+    <p>
+    <img src="{% static "/weblicht/wl-step2.png" %}"/>
+
+    <p>
+    4. Once tokenisation is done, you can download results by clicking on the arrow in the right bottom corner of "ESTNLTK tokeniser" box.
+    The results should look as follows:
+
+    <p>
+    <textarea rows="25" cols="100">
+    <?xml version="1.0" encoding="UTF-8"?><D-Spin xmlns="http://www.dspin.de/data" version="0.4">
+      <MetaData xmlns="http://www.dspin.de/data/metadata"><Services><cmd:CMD xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cmd="http://www.clarin.eu/cmd/1" CMDVersion="1.2" xsi:schemaLocation="http://www.clarin.eu/cmd/1 http://catalog.clarin.eu/ds/ComponentRegistry/rest/registry/profiles/clarin.eu:cr1:p_1320657629623/xsd"><cmd:Resources><cmd:ResourceProxyList></cmd:ResourceProxyList><cmd:JournalFileProxyList></cmd:JournalFileProxyList><cmd:ResourceRelationList></cmd:ResourceRelationList></cmd:Resources><cmd:Components><cmd:WebServiceToolChain><cmd:GeneralInfo><cmd:Descriptions><cmd:Description></cmd:Description></cmd:Descriptions><cmd:ResourceName>Custom chain</cmd:ResourceName><cmd:ResourceClass>Toolchain</cmd:ResourceClass></cmd:GeneralInfo><cmd:Toolchain><cmd:ToolInChain><cmd:PID>http://hdl.handle.net/11297/1-00-0000-0000-0000-0013EL</cmd:PID></cmd:ToolInChain></cmd:Toolchain></cmd:WebServiceToolChain></cmd:Components></cmd:CMD></Services></MetaData>
+      <TextCorpus xmlns="http://www.dspin.de/data/textcorpus" lang="ee">
+        <text>Tere! Mina olen Estnltk!</text>
+        <tc:tokens xmlns:tc="http://www.dspin.de/data/textcorpus">
+          <tc:token start="0" end="4" ID="t0">Tere</tc:token>
+          <tc:token start="4" end="5" ID="t1">!</tc:token>
+          <tc:token start="6" end="10" ID="t2">Mina</tc:token>
+          <tc:token start="11" end="15" ID="t3">olen</tc:token>
+          <tc:token start="16" end="23" ID="t4">Estnltk</tc:token>
+          <tc:token start="23" end="24" ID="t5">!</tc:token>
+        </tc:tokens>
+      </TextCorpus>
+    </D-Spin>
+    </textarea>
+</div>
+</body>
+</html>.
